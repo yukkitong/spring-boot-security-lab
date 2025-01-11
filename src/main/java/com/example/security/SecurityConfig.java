@@ -32,12 +32,11 @@ public class SecurityConfig {
                     auth
                             .requestMatchers("/", "/index.html").permitAll()
                             .requestMatchers("/private/**").hasRole("ADMIN")
-                            .requestMatchers("/public/**").hasRole("USER")
+                            .requestMatchers("/public/**").hasAnyRole("USER", "ADMIN")
                             .anyRequest().authenticated();
                 })
                 .httpBasic(withDefaults())
                 .formLogin(withDefaults());
-
         return http.build();
     }
 
